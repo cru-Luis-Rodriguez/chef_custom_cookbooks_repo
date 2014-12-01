@@ -1,0 +1,3 @@
+[submodule "config_newrelic"]
+	path = config_newrelic
+	url = https://github.com/cru-Luis-Rodriguez/config_newrelic.git
