@@ -4,3 +4,6 @@
 [submodule "yum_update"]
 	path = yum_update
 	url = https://github.com/cru-Luis-Rodriguez/yum_update.git
+[submodule "aem_config_newrelic"]
+	path = aem_config_newrelic
+	url = https://github.com/cru-Luis-Rodriguez/aem_config_newrelic.git
