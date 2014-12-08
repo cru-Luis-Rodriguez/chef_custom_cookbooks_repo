@@ -7,3 +7,6 @@
 [submodule "aem_config_newrelic"]
 	path = aem_config_newrelic
 	url = https://github.com/cru-Luis-Rodriguez/aem_config_newrelic.git
+[submodule "aem_disp_config"]
+	path = aem_disp_config
+	url = https://github.com/cru-Luis-Rodriguez/aem_disp_config.git
