@@ -10,3 +10,6 @@
 [submodule "aem_disp_config"]
 	path = aem_disp_config
 	url = https://github.com/cru-Luis-Rodriguez/aem_disp_config.git
+[submodule "manage_tnsnames"]
+	path = manage_tnsnames
+	url = https://github.com/cru-Luis-Rodriguez/manage_tnsnames.git
