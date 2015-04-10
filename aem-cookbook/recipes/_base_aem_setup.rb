@@ -41,6 +41,11 @@ when "rhel"
   end.run_action(:install)
 end
 
+gem_package "bundler" do
+  action : install
+  ignore_failure true
+end
+
 package 'git' do
   action :nothing
 end.run_action(:install)
