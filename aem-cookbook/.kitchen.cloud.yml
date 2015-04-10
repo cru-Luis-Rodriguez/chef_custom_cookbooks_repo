@@ -1,0 +1,285 @@
+---
+driver_config:
+  google_client_email: <%= ENV['GOOGLE_CLIENT_EMAIL'] %>
+  google_key_location: <%= ENV['GOOGLE_KEY_LOCATION'] %>
+  google_project: <%= ENV['GOOGLE_PROJECT'] %>
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.5
+    driver_plugin: gce
+    driver_config:
+      # GCE
+      image_name: 'centos-6-v20140415'
+      area: <%= ENV['GCE_AREA'] %>
+      public_key_path: <%= ENV['GCE_PUBLIC_KEY_PATH'] %>
+
+suites:
+  - name: author-6.0.0-oraclejdk7
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::author]
+    attributes:
+      aem:
+        version: '6.0.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_600'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_600'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '7'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: publish-6.0.0-oraclejdk7
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '6.0.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_600'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_600'] %>
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '7'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: author-publish-6.0.0-oraclejdk7
+    driver_config:
+      machine_type: 'n1-standard-2'
+    run_list:
+      - recipe[aem::author]
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '6.0.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_600'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_600'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '7'
+        oracle:
+          accept_oracle_download_terms: true
+
+
+  - name: author-5.6.1-oraclejdk7
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::author]
+    attributes:
+      aem:
+        version: '5.6.1'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_561'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_561'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '7'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: publish-5.6.1-oraclejdk7
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '5.6.1'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_561'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_561'] %>
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '7'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: author-publish-5.6.1-oraclejdk7
+    driver_config:
+      machine_type: 'n1-standard-2'
+    run_list:
+      - recipe[aem::author]
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '5.6.1'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_561'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_561'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '7'
+        oracle:
+          accept_oracle_download_terms: true
+
+
+  - name: author-5.6.0-oraclejdk6
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::author]
+    attributes:
+      aem:
+        version: '5.6.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_560'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_560'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '6'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: publish-5.6.0-oraclejdk6
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '5.6.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_560'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_560'] %>
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '6'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: author-publish-5.6.0-oraclejdk6
+    driver_config:
+      machine_type: 'n1-standard-2'
+    run_list:
+      - recipe[aem::author]
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '5.6.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_560'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_560'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '6'
+        oracle:
+          accept_oracle_download_terms: true
+
+
+  - name: author-5.5.0-oraclejdk6
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::author]
+    attributes:
+      aem:
+        version: '5.5.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_550'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_550'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '6'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: publish-5.5.0-oraclejdk6
+    driver_config:
+      machine_type: 'n1-standard-1'
+    run_list:
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '5.5.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_550'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_550'] %>
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '6'
+        oracle:
+          accept_oracle_download_terms: true
+  - name: author-publish-5.5.0-oraclejdk6
+    driver_config:
+      machine_type: 'n1-standard-2'
+    run_list:
+      - recipe[aem::author]
+      - recipe[aem::publish]
+    attributes:
+      aem:
+        version: '5.5.0'
+        download_url: <%= ENV['AEM_DOWNLOAD_URL_550'] %>
+        license_url: <%= ENV['AEM_LICENSE_URL_550'] %>
+        author:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+        publish:
+          startup:
+            max_attempts: 40
+            wait_between_attempts: 30
+      java:
+        install_flavor: 'oracle'
+        jdk_version: '6'
+        oracle:
+          accept_oracle_download_terms: true
+
+
+  - name: dispatcher
+    driver_config:
+      machine_type: 'f1-micro'
+    run_list:
+      - recipe[aem::dispatcher]
+    attributes:
+      aem:
+        dispatcher:
+          mod_dispatcher_url: <%= ENV['AEM_DISPATCHER_URL'] %>
+          version: '4.1.0'
