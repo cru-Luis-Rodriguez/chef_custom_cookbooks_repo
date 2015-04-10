@@ -17,7 +17,31 @@
 # limitations under the License.
 
 # We need these for the jcr_node provider
-package 'libcurl-devel' do
+
+case node["platform_family"]
+when "debian"
+  # do things on debian-ish platforms (debian, ubuntu, linuxmint)
+
+  package 'libcurl4-openssl-dev' do
+    action :nothing
+  end.run_action(:install)
+
+  package 'maven' do
+    action :nothing
+  end.run_action(:install)
+
+  package 'ruby' do
+    action :nothing
+  end.run_action(:install)
+
+when "rhel"
+  # do things on RHEL platforms (redhat, centos, scientific, etc)
+  package 'libcurl-devel' do
+    action :nothing
+  end.run_action(:install)
+end
+
+package 'git' do
   action :nothing
 end.run_action(:install)
 
