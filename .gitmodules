@@ -13,3 +13,6 @@
 [submodule "manage_tnsnames"]
 	path = manage_tnsnames
 	url = https://github.com/cru-Luis-Rodriguez/manage_tnsnames.git
+[submodule "aem"]
+        path = aem
+        url = https://github.com/cru-Luis-Rodriguez/aem.git
