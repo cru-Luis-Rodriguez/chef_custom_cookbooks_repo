@@ -11,5 +11,7 @@ include_recipe 'aws'
 aws_s3_file "/tmp/license.properties" do
   bucket "cru-aem6"
   remote_path "/installation_files/license.properties"
+  aws_access_key_id node[:custom_access_key]
+  aws_secret_access_key node[:custom_secret_key]
 end
 
