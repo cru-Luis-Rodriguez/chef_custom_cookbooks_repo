@@ -8,7 +8,7 @@
 
 include_recipe 'aws'
 
-aws_s3_file "#{Chef::Config[:file_cache_path]}/install/aem/license.properties" do
+aws_s3_file "/tmp/install/aem/license.properties" do
   bucket "cru-aem6"
   remote_path "/installation_files/license.properties"
   aws_access_key_id node[:custom_access_key]
