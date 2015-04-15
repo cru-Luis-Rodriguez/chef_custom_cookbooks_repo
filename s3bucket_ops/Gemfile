@@ -16,3 +16,8 @@ gem 'berkshelf'
 
 gem 'test-kitchen'
 gem 'kitchen-vagrant'
+
+#gem 'aws-sdk', '< 2.0'
+ 
+# gemspec
+#spec.add_dependency('aws-sdk', '< 2.0')
