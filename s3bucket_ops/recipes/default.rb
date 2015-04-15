@@ -8,7 +8,6 @@
 
 include_recipe 'aws'
 aws = data_bag_item("aws", "main")
-include Opscode::Aws::Ec2
 
 aws_s3_file "/tmp/license.properties" do
   bucket "cru-aem6"
