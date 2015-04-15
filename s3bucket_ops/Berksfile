@@ -2,6 +2,4 @@ source "https://supermarket.getchef.com"
 
 metadata
 
-#cookbook "aws", "= 2.2.2"
-#test to see if update version of aws causes problems
 cookbook "aws", "= 2.5.0"
