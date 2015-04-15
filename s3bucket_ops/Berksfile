@@ -4,4 +4,4 @@ metadata
 
 #cookbook "aws", "= 2.2.2"
 #test to see if update version of aws causes problems
-cookbook "aws"
+cookbook "aws", "= 2.5.0"
