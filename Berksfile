@@ -1,5 +1,5 @@
 source "https://supermarket.getchef.com"
 
-#cookbook "aws", "= 2.2.2"
-#test to see if update version of aws causes problems
-cookbook "aws"
+#lock version of aws_sdk to fix issue with: Name error -- uninitialize 
+
+cookbook "aws", "= 2.5.0"
