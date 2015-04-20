@@ -54,7 +54,7 @@ execute 'install_curb' do
   not_if ' /usr/bin/gem list -d curb | grep -q curb '
 end  
 
-require 'curb'
+#require 'curb'
 
 unless node['aem']['license_url']
   Chef::Application.fatal! 'aem.license_url attribute cannot be nil. Please populate that attribute.'
