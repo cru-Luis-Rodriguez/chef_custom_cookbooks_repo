@@ -101,7 +101,7 @@ default[:aem][:author] = {
     #  :password => "the admin password on the remote"
     #}
   ],
-  :find_replication_hosts_dynamically => true
+  :find_replication_hosts_dynamically => false
 }
 default[:aem][:author][:startup][:max_attempts] = 40
 default[:aem][:author][:startup][:wait_between_attempts] = 30
