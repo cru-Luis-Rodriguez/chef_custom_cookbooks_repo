@@ -32,13 +32,13 @@ Chef::Log.info("The private IP is '#{dispatcher[:hostname]}'")
 
 #source url can be file:///tmp/somefile
 
-aws_s3_file "/tmp/#{node[:aem][:jar_source]}.jar" do
+aws_s3_file "/tmp/'#{node[:aem][:jar_source]}'.jar" do
       bucket "cru-aem6"
-      remote_path "/installation_files/#{node[:aem][:jar_source]}.jar"
+      remote_path "/installation_files/'#{node[:aem][:jar_source]}'.jar"
       aws_access_key_id aws['aws_access_key_id']
       aws_secret_access_key aws['aws_secret_access_key']
       mode "0644"
-      not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
+      not_if { ::File.exist?("/tmp/'#{node[:aem][:jar_source]}'.jar") }
     end
 
 unless node[:aem][:use_yum]
