@@ -64,8 +64,6 @@ action :add do
           :name => n[:fqdn]
         }
       end
-    end
-    #end FC003
     hosts.sort! { |a,b| a[:name] <=> b[:name] }
   end
 
