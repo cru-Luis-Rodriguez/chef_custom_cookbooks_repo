@@ -54,10 +54,6 @@ action :add do
   if new_resource.dynamic_cluster
     log "Finding replication hosts dynamically..."
     hosts = []
-    #fix issue FC003
-    if Chef::Config[:solo]
-       Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
-    else
       search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
         log "Found host: #{n[:fqdn]}"
         hosts << {

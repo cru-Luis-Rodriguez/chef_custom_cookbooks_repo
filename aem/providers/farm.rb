@@ -47,13 +47,8 @@ action :add do
     cluster_name = new_resource.cluster_name
     cluster_type = new_resource.cluster_type
     timeout = new_resource.render_timeout
-    #fix issue FC003
-    if Chef::Config[:solo]
-       Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
-    else
      renders = search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}"))
     end
-    #end FC003
     #Don't want to rely on what order the search results come back in
     renders.sort! {|a,b| a[:hostname] <=> b[:hostname]}
     renders.each do |r|
