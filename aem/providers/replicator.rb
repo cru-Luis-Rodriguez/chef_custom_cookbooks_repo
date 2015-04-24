@@ -125,7 +125,7 @@ action :remove do
       log "Found host: #{n[:hostname]}"
       hosts << {
         :ipaddress => "#{n[:private_ip]}",
-        :port => "#{n[:aem][aem_instance][:port]"},
+        :port => "#{n[:aem][aem_instance][:port]}",
         :user => "#{n[:aem][aem_instance][:admin_user]}",
         :password => "#{n[:aem][aem_instance][:admin_password]}",
         :name => "#{n[:hostname]}"
