@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include_recipe "aws"
+aws = data_bag_item("aws", "main")
+
 node.default[:apache][:enable_default_site] = false
 
 include_recipe "apache2"
