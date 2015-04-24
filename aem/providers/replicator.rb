@@ -120,14 +120,14 @@ action :remove do
     hosts = []
     search(:node, %Q(role:"#{role}")) do |n|
       Chef::Log.info("The private IP is '#{n[:private_ip]}'")
-      Chef::Log.info("The private IP is '#{n[:hostname]}'")
+      Chef::Log.info("The hostname is '#{n[:hostname]}'")
       log "Found host: #{n[:hostname]}"
       hosts << {
-        :ipaddress => n[:private_ip],
-        :port => n[:aem][aem_instance][:port],
-        :user => n[:aem][aem_instance][:admin_user],
-        :password => n[:aem][aem_instance][:admin_password],
-        :name => n[:hostname]
+        :ipaddress => <%= n[:private_ip] %>,
+        :port => "<%= n[:aem][aem_instance][:port] %>,
+        :user => "<%= n[:aem][aem_instance][:admin_user] %>,
+        :password => <%= n[:aem][aem_instance][:admin_password] %>,
+        :name => <%= n[:hostname] %>
       }
     end
     hosts.sort! { |a,b| a[:name] <=> b[:name] }
