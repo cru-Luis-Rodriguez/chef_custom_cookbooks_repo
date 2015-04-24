@@ -55,7 +55,8 @@ action :add do
     log "Finding replication hosts dynamically..."
     hosts = []
      search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
-        log "Found host: #{n[:fqdn]}"
+        #log "Found host: #{n[:fqdn]}"
+        log "Found host: #{n[:hostname]}"
         hosts << {
           #:ipaddress => n[:ipaddress],
           :ipaddress => n[:private_ip],
@@ -118,7 +119,8 @@ action :remove do
     hosts = []
     #search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
     search(:node, %Q(role:"#{role}")) do |n|
-      log "Found host: #{n[:fqdn]}"
+      #log "Found host: #{n[:fqdn]}"
+      log "Found host: #{n[:hostname]}"
       hosts << {
         #:ipaddress => n[:ipaddress],
         :ipaddress => n[:private_ip],
@@ -170,4 +172,3 @@ action :remove do
     counter += 1
   end
 end
-
