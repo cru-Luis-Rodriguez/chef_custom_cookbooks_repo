@@ -53,19 +53,18 @@ action :add do
   if new_resource.dynamic_cluster
     log "Finding replication hosts dynamically..."
     hosts = []
-     search(:node, %Q(role:"#{role}")) do |n|
-        Chef::Log.info("The private IP is '#{n[:private_ip]}'")
-        Chef::Log.info("The private IP is '#{n[:hostname]}'")
-        log "Found host: #{n[:hostname]}"
-        hosts << [
-          {"ipaddress": "#{n[:private_ip]}",
-           "port": "#{n[:aem][aem_instance][:port]}",
-           "user": "#{n[:aem][aem_instance][:admin_user]}",
-           "password": "#{n[:aem][aem_instance][:admin_password]}",
-           "name": "#{n[:hostname]}"
-          }
-         ]
-      end
+    search(:node, %Q(role:"#{role}")) do |n|
+      Chef::Log.info("The private IP is '#{n[:private_ip]}'")
+      Chef::Log.info("The private DNS is '#{n[:private_dns_name]}'")
+      log "Found host: #{n[:private_dns_name]}"
+      hosts << {
+        :ipaddress => n[:private_ip],
+        :port => n[:aem][aem_instance][:port],
+        :user => n[:aem][aem_instance][:admin_user],
+        :password => n[:aem][aem_instance][:admin_password],
+        :name => n[:private_dns_name]
+      }
+    end
     Chef::Log.info("This the ADD host '#{hosts.inspect}'")
     hosts.sort! { |a,b| a[:name] <=> b[:name] }
   end
@@ -118,18 +117,17 @@ action :remove do
     hosts = []
     search(:node, %Q(role:"#{role}")) do |n|
       Chef::Log.info("The private IP is '#{n[:private_ip]}'")
-      Chef::Log.info("The hostname is '#{n[:hostname]}'")
-      log "Found host: #{n[:hostname]}"
-      hosts << [
-        {"ipaddress": "#{n[:private_ip]}",
-         "port": "#{n[:aem][aem_instance][:port]}",
-         "user": "#{n[:aem][aem_instance][:admin_user]}",
-         "password": "#{n[:aem][aem_instance][:admin_password]}",
-         "name": "#{n[:hostname]}"
-         }
-      ]
+      Chef::Log.info("The private DNS is '#{n[:private_dns_name]}'")
+      log "Found host: #{n[:private_dns_name]}"
+      hosts << {
+        :ipaddress => n[:private_ip],
+        :port => n[:aem][aem_instance][:port],
+        :user => n[:aem][aem_instance][:admin_user],
+        :password => n[:aem][aem_instance][:admin_password],
+        :name => n[:private_dns_name]
+      }
     end
-    Chef::Log.info("REMOVE  host HASH '#{hosts.inspect}'")
+    Chef::Log.info("REMOVE host HASH '#{hosts.inspect}'")
     hosts.sort! { |a,b| a[:name] <=> b[:name] }
 
     if type == :agent || type == :flush_agent
