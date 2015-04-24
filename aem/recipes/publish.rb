@@ -21,7 +21,7 @@ aws = data_bag_item("aws", "main")
 include_recipe "aem::_base_aem_setup"
 
 #source url can be file:///tmp/cq60-author-p4502.jar need to setup an if statement to download the file from S3
-aws_s3_file ("/tmp/#{node[:aem][:jar_source]}.jar)" do
+aws_s3_file ("/tmp/#{node[:aem][:jar_source]}.jar") do
       bucket "cru-aem6"
       remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
       aws_access_key_id aws['aws_access_key_id']
