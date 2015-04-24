@@ -58,11 +58,11 @@ action :add do
       Chef::Log.info("The private DNS is '#{n[:private_dns_name]}'")
       log "Found host: #{n[:private_dns_name]}"
       hosts << {
-        :ipaddress => "#{n[:private_ip]}",
-        :port => "#{n[:aem][aem_instance][:port]}",
-        :user => "#{n[:aem][aem_instance][:admin_user]}",
-        :password => "#{n[:aem][aem_instance][:admin_password]}",
-        :name => "#{n[:private_dns_name]}"
+        :ipaddress => n[:private_ip],
+        :port => n[:aem][aem_instance][:port],
+        :user => n[:aem][aem_instance][:admin_user],
+        :password => n[:aem][aem_instance][:admin_password],
+        :name => n[:private_dns_name]
       }
     end
     Chef::Log.info("This the ADD host '#{hosts.inspect}'")
