@@ -24,9 +24,11 @@ include_recipe "aem::_base_aem_setup"
 
 publisher = search(:node, "role:publisher").first
 Chef::Log.info("The private IP is '#{publisher[:private_ip]}'")
+Chef::Log.info("The private IP is '#{publisher[:hostname]}'")
 
 dispatcher = search(:node, "role:dispatcher").first
 Chef::Log.info("The private IP is '#{dispatcher[:private_ip]}'")
+Chef::Log.info("The private IP is '#{dispatcher[:hostname]}'")
 
 #source url can be file:///tmp/somefile
 

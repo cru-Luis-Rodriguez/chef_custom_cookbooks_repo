@@ -57,11 +57,13 @@ action :add do
      search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
         log "Found host: #{n[:fqdn]}"
         hosts << {
-          :ipaddress => n[:ipaddress],
+          #:ipaddress => n[:ipaddress],
+          :ipaddress => n{:private_ip],
           :port => n[:aem][aem_instance][:port],
           :user => n[:aem][aem_instance][:admin_user],
           :password => n[:aem][aem_instance][:admin_password],
-          :name => n[:fqdn]
+          #:name => n[:fqdn]
+          :name => n[:hostname]
         }
       end
     hosts.sort! { |a,b| a[:name] <=> b[:name] }
@@ -118,11 +120,13 @@ action :remove do
     search(:node, %Q(role:"#{role}")) do |n|
       log "Found host: #{n[:fqdn]}"
       hosts << {
-        :ipaddress => n[:ipaddress],
+        #:ipaddress => n[:ipaddress],
+        :ipaddress => n{:private_ip],
         :port => n[:aem][aem_instance][:port],
         :user => n[:aem][aem_instance][:admin_user],
         :password => n[:aem][aem_instance][:admin_password],
-        :name => n[:fqdn]
+        #:name => n[:fqdn]
+        :name => n[:hostname]
       }
     end
     hosts.sort! { |a,b| a[:name] <=> b[:name] }
