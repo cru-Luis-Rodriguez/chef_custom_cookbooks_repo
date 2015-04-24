@@ -47,6 +47,13 @@ aem_dispatcher 'mod_dispatcher.so' do
   action :install
 end
 
+directory "#{node[:apache][:dir]}/conf" do
+  owner "root"
+  group node[:apache][:root_group]
+  mode "0775"
+  action :create
+end
+
 #if we want to support non-apache, we'll need to do some more work here
 apache_module "dispatcher" do
   #this will use the template mods/dispatcher.conf.erb
