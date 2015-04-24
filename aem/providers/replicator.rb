@@ -58,7 +58,7 @@ action :add do
         log "Found host: #{n[:fqdn]}"
         hosts << {
           #:ipaddress => n[:ipaddress],
-          :ipaddress => n{:private_ip],
+          :ipaddress => n[:private_ip],
           :port => n[:aem][aem_instance][:port],
           :user => n[:aem][aem_instance][:admin_user],
           :password => n[:aem][aem_instance][:admin_password],
@@ -121,7 +121,7 @@ action :remove do
       log "Found host: #{n[:fqdn]}"
       hosts << {
         #:ipaddress => n[:ipaddress],
-        :ipaddress => n{:private_ip],
+        :ipaddress => n[:private_ip],
         :port => n[:aem][aem_instance][:port],
         :user => n[:aem][aem_instance][:admin_user],
         :password => n[:aem][aem_instance][:admin_password],
