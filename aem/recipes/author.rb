@@ -22,6 +22,9 @@ include_recipe "aws"
 aws = data_bag_item("aws", "main")
 include_recipe "aem::_base_aem_setup"
 
+appserver = search(:node, "role:author").first
+Chef::Log.info("The private IP is '#{appserver[:private_ip]}'")
+
 #source url can be file:///tmp/somefile
 
 aws_s3_file "/tmp/cq60-author-p4502.jar" do

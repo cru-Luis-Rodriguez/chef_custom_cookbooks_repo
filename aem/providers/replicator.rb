@@ -20,9 +20,6 @@
 
 require 'erb'
 
-appserver = search(:node, "role:author").first
-Chef::Log.info("The private IP is '#{appserver[:private_ip]}'")
-
 action :add do
   hosts = new_resource.remote_hosts
   local_user = new_resource.local_user
