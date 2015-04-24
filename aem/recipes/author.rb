@@ -22,8 +22,11 @@ include_recipe "aws"
 aws = data_bag_item("aws", "main")
 include_recipe "aem::_base_aem_setup"
 
-appserver = search(:node, "role:author").first
-Chef::Log.info("The private IP is '#{appserver[:private_ip]}'")
+publisher = search(:node, "role:publisher").first
+Chef::Log.info("The private IP is '#{publisher[:private_ip]}'")
+
+dispatcher = search(:node, "role:dispatcher").first
+Chef::Log.info("The private IP is '#{dispatcher[:private_ip]}'")
 
 #source url can be file:///tmp/somefile
 
