@@ -22,6 +22,17 @@ include_recipe "apache2"
 include_recipe "apache2::mod_ssl"
 include_recipe "apache2::mod_expires"
 
+#source url can be file:///tmp/somefile
+
+aws_s3_file "/tmp/mod_dispatcher.so" do
+      bucket "cru-aem6"
+      remote_path "/installation_files/dispatcher-apache2.4-4.1.7.so"
+      aws_access_key_id aws['aws_access_key_id']
+      aws_secret_access_key aws['aws_secret_access_key']
+      mode "0644"
+      not_if { ::File.exist?("/tmp/mod_dispatcher.so") }
+    end
+
 aem_dispatcher 'mod_dispatcher.so' do
   package_install          node[:aem][:use_yum]
   dispatcher_uri           node[:aem][:dispatcher][:mod_dispatcher_url]

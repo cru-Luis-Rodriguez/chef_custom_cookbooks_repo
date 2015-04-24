@@ -16,31 +16,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# We need these for the jcr_node provider
 execute 'apt-get-update' do
   command 'apt-get update'
   ignore_failure true
-  only_if { apt_installed? }
   not_if { ::File.exist?('/var/lib/apt/periodic/update-success-stamp') }
 end
 
-package "libcurl4-gnutls-dev" do
-  action :upgrade
+package "curl" do
+  action :install
+end  
+  
+case node[:platform]
+  when "redhat", "centos"
+    package "libcurl-devel" do
+      action :upgrade
+    end
+  when "ubuntu", "debian"
+   %w{libcurl4-gnutls-dev libcurl4-openssl-dev}.each do |pkg1|
+     package "#{pkg1}" do
+       action :upgrade
+      end
+    end
 end
-package "libcurl4-openssl-dev" do
-  action :upgrade
-end
-package "maven" do
-  action :upgrade
-end
-package "ruby" do
-  action :upgrade
-end
-package "git" do
-  action :upgrade
-end
-package "gcc" do
-  action :upgrade
+
+%w{maven ruby git gcc}.each do |pkg2|
+ package "#{pkg2}" do
+   action :upgrade
+ end
 end
 
 gem_package "bundler" do
@@ -48,11 +50,18 @@ gem_package "bundler" do
   ignore_failure true
 end
 
-execute 'install_curb' do
-  command 'sudo gem install curb'
-  ignore_failure true
-  not_if ' /usr/bin/gem list -d curb | grep -q curb '
-end  
+case node[:platform]
+  when "redhat", "centos"
+    chef_gem "curb" do
+      action :nothing
+    end.run_action(:install)
+  when "ubuntu", "debian"
+    chef_gem "curb" do
+      compile_time true if Chef::Resource::ChefGem.instance_methods(false).include?(:compile_time)
+      action :install
+      ignore_failure true
+    end  
+end
 
 #require 'curb'
 

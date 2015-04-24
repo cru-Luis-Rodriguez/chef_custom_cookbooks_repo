@@ -1,14 +1,34 @@
-ver:
+---
+driver:
   name: vagrant
-
+  customize:
+    memory: 2048
+  network:
+    # Allow access to the aem webui which is useful when troubleshooting
+      - - forwarded_port
+        - guest: 4502
+          host: 4502
+          auto_correct: true
 provisioner:
   name: chef_solo
+  environments_path: './test/environments'
+  roles_path: './test/roles'
+  data_bags_path: './test/integration/data_bags'
 
 platforms:
   - name: ubuntu-12.04
+    driver_config:
+        box: opscode-ubuntu-12.04
+        box_url: http://files.vagrantup.com/precise32.box
 
 suites:
   - name: default
     run_list:
+      - recipe[apt::default]
+      - recipe[java::default]
       - recipe[aem::author]
+      - role[aem]
     attributes:
+    provisioner:
+        solo.rb:
+            environment: stack

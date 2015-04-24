@@ -16,13 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe "curl::default"
-include_recipe "curl::libcurl"
+#include_recipe "curl::default"
+#include_recipe "curl::libcurl"
 include_recipe "aws"
 aws = data_bag_item("aws", "main")
 include_recipe "aem::_base_aem_setup"
 
-#source url can be file:///tmp/cq60-author-p4502.jar need to setup an if statement to download the file from S3
+#source url can be file:///tmp/somefile
+
 aws_s3_file "/tmp/cq60-author-p4502.jar" do
       bucket "cru-aem6"
       remote_path "/installation_files/cq60-author-p4502.jar"
