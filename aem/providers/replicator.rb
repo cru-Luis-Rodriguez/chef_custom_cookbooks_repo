@@ -20,6 +20,13 @@
 
 require 'erb'
 
+author = search(:node, "role:author").first
+Chef::Log.info("The private IP is '#{author[:private_ip]}'")
+publish = search(:node, "role:author").first
+Chef::Log.info("The private IP is '#{publish[:private_ip]}'")
+dispatcher = search(:node, "role:dispatcher").first
+Chef::Log.info("The private IP is '#{author[:private_ip]}'")
+
 action :add do
   hosts = new_resource.remote_hosts
   local_user = new_resource.local_user
