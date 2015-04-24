@@ -20,11 +20,11 @@
 
 require 'erb'
 
-author = search(:node, "role:author").first
+author1 = search(:node, "role:author").first
 Chef::Log.info("The private IP is '#{author[:private_ip]}'")
-publish = search(:node, "role:author").first
+publish1 = search(:node, "role:author").first
 Chef::Log.info("The private IP is '#{publish[:private_ip]}'")
-dispatcher = search(:node, "role:dispatcher").first
+dispatcher1 = search(:node, "role:dispatcher").first
 Chef::Log.info("The private IP is '#{author[:private_ip]}'")
 
 action :add do
