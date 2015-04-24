@@ -130,6 +130,7 @@ action :remove do
         :name => "<%= n[:hostname] %>"
       }
     end
+    puts hosts.inspect
     hosts.sort! { |a,b| a[:name] <=> b[:name] }
 
     if type == :agent || type == :flush_agent
