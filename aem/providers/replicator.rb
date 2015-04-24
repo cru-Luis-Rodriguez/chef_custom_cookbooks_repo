@@ -54,7 +54,8 @@ action :add do
   if new_resource.dynamic_cluster
     log "Finding replication hosts dynamically..."
     hosts = []
-     search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
+     #search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
+     search(:node, %Q(role:"#{role}")).first do |n|
         #log "Found host: #{n[:fqdn]}"
         log "Found host: #{n[:hostname]}"
         hosts << {
@@ -118,7 +119,7 @@ action :remove do
     log "Finding replication hosts dynamically..."
     hosts = []
     #search(:node, %Q(role:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
-    search(:node, %Q(role:"#{role}")) do |n|
+    search(:node, %Q(role:"#{role}")).first do |n|
       #log "Found host: #{n[:fqdn]}"
       log "Found host: #{n[:hostname]}"
       hosts << {
