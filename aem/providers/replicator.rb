@@ -58,11 +58,11 @@ action :add do
         Chef::Log.info("The private IP is '#{n[:hostname]}'")
         log "Found host: #{n[:hostname]}"
         hosts << {
-          :ipaddress => "#{n[:private_ip]}",
-          :port => "#{n[:aem][aem_instance][:port]}",
-          :user => "#{n[:aem][aem_instance][:admin_user]}",
-          :password => "#{n[:aem][aem_instance][:admin_password]}",
-          :name => "#{n[:hostname]}"
+          "ipaddress": "#{n[:private_ip]}",
+          "port":  "#{n[:aem][aem_instance][:port]}",
+          "user": "#{n[:aem][aem_instance][:admin_user]}",
+          "password": "#{n[:aem][aem_instance][:admin_password]}",
+          "name": "#{n[:hostname]}"
         }
       end
     Chef::Log.info("This the ADD host '#{hosts.inspect}'")
@@ -120,11 +120,11 @@ action :remove do
       Chef::Log.info("The hostname is '#{n[:hostname]}'")
       log "Found host: #{n[:hostname]}"
       hosts << {
-        :ipaddress => "#{n[:private_ip]}",
-        :port => "#{n[:aem][aem_instance][:port]}",
-        :user => "#{n[:aem][aem_instance][:admin_user]}",
-        :password => "#{n[:aem][aem_instance][:admin_password]}",
-        :name => "#{n[:hostname]}"
+        "ipaddress": "#{n[:private_ip]}",
+         "port":  "#{n[:aem][aem_instance][:port]}",
+         "user": "#{n[:aem][aem_instance][:admin_user]}",
+         "password": "#{n[:aem][aem_instance][:admin_password]}",
+         "name": "#{n[:hostname]}"
       }
     end
     Chef::Log.info("REMOVE  host HASH '#{hosts.inspect}'")
