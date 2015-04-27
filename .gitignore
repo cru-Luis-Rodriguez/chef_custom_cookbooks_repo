@@ -1,0 +1,8 @@
+# ignore all bin directories
+# matches "bin" in any subfolder
+
+
+# ignore all target directories
+
+# ignore all files json
+aem/test/integration/stack_settings_bak.json
