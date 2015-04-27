@@ -1,13 +1,14 @@
 # aem-cookbook
-
+** Modified version of https://github.com/tmaier/aem-cookbook cookbook. 
+ 
 This cookbook installs and configures [Adobe Experience Manager (AEM)](http://www.adobe.com/solutions/web-experience-management.html). (NOTE: CQ versions 5.4 and 5.5 should work as well -- CQ was renamed to AEM as of version 5.6). Included are recipes to install an author or publish instance as well as the dispatcher module for Apache HTTP server.
 
 ## Supported Platforms
 
-* CentOS
+* CentOS, Ubuntu
 
 ## Supported Versions
-
+** AEM 6.0.1 -- testing
 * AEM 6.0.0
 * AEM 5.6.1
 * AEM 5.6.0
@@ -16,7 +17,7 @@ This cookbook installs and configures [Adobe Experience Manager (AEM)](http://ww
 ## Featured Functionality
 
 * Unattended installation of aem author, publish, and dispatcher nodes.
-* Automatically search for and configure aem cluster members (dispatcher, author, publish) using chef searches.
+***  Automatically search for and configure aem cluster members (dispatcher, author, publish) using chef searches. (this does not work) (I've made changes to the original recipe to make it work on AWS opsworks. 
 * Configure replication agents using the replicator provider.
 * Configure dispatcher farms with the farm provider.
 * Deploy and remove aem packages with the package provider (recommended for development purposes only).
