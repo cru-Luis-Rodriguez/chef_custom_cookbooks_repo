@@ -18,5 +18,5 @@ depends 'ark', '~> 0.8.2'
 depends 'iptables'
 depends 'java'
 depends "aws"
-#depends "curl"
+depends "curl"
 depends "apt"
