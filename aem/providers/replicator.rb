@@ -49,6 +49,7 @@ action :add do
     when :agent
       agent = aem_instance = :publish
     end
+Chef::Log.info("The private IP is '#{role}'")
 
   if new_resource.dynamic_cluster
     log "Finding replication hosts dynamically..."
