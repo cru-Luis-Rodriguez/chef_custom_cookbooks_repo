@@ -53,7 +53,7 @@ action :add do
   if new_resource.dynamic_cluster
     log "Finding replication hosts dynamically..."
     hosts = []
-    search(:node, %Q(layer:"#{role}" AND aem_cluster_name:"#{cluster_name}" )) do |n|
+    search(:node, %Q(layer:"#{role}" AND aem_cluster_name:"#{cluster_name}")) do |n|
       log "Found host: #{n[:private_dns_name]}"
       hosts << {
         :ipaddress => n[:private_ip],

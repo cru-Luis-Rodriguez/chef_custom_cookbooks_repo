@@ -179,7 +179,7 @@ aem_replicator "create_flush_agents" do
   local_port node[:aem][:publish][:port]
   remote_hosts node[:aem][:publish][:cache_hosts]
   dynamic_cluster node[:aem][:publish][:find_cache_hosts_dynamically]
-  #cluster_name node[:aem][:cluster_name]
+  cluster_name node[:aem][:cluster_name]
   cluster_role node[:aem][:dispatcher][:cluster_role]
   type :flush_agent
   action :add
@@ -192,7 +192,7 @@ aem_replicator "flush_cache" do
   local_port node[:aem][:publish][:port]
   remote_hosts node[:aem][:publish][:cache_hosts]
   dynamic_cluster node[:aem][:publish][:find_cache_hosts_dynamically]
-  #cluster_name node[:aem][:cluster_name]
+  cluster_name node[:aem][:cluster_name]
   cluster_role node[:aem][:dispatcher][:cluster_role]
   type :flush
   action :add
