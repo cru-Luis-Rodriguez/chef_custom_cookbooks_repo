@@ -54,7 +54,7 @@ action :add do
     log "Finding replication hosts dynamically..."
     hosts = []
     #search(:node, %Q(role:"#{role}")) do |n|
-    search(:node, (layer:"#{role}")) do |n|
+    search(:node, %Q(layer:"#{role}")) do |n|
       Chef::Log.info("The private IP is '#{n[:private_ip]}'")
       Chef::Log.info("The private DNS is '#{n[:private_dns_name]}'")
       Chef::Log.info("The port number is '#{n[:aem][aem_instance][:port]}'")
@@ -120,7 +120,7 @@ action :remove do
     log "Finding replication hosts dynamically..."
     hosts = []
     #search(:node, %Q(role:"#{role}")) do |n|
-     search(:node, (layer:"#{role}")) do |n|
+     search(:node, %Q(layer:"#{role}")) do |n|
       Chef::Log.info("The private IP is '#{n[:private_ip]}'")
       Chef::Log.info("The private DNS is '#{n[:private_dns_name]}'")
       Chef::Log.info("The port number is '#{n[:aem][aem_instance][:port]}'")
