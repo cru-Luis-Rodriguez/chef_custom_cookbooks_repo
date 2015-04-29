@@ -16,30 +16,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include_recipe "curl::default"
+include_recipe "curl::libcurl"
 include_recipe 'aws'
 aws = data_bag_item("aws", "main")
-include_recipe "aem::_base_aem_setup"
+#include_recipe "aem::_base_aem_setup"
 
-#source url can be file:///tmp/cq60-author-p4502.jar need to setup an if statement to download the file from S3
-aws_s3_file ("/tmp/#{node[:aem][:jar_source]}.jar") do
-      bucket "cru-aem6"
-      remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
-      aws_access_key_id aws['aws_access_key_id']
-      aws_secret_access_key aws['aws_secret_access_key']
-      mode "0644"
-      not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
-    end
-
-unless node[:aem][:use_yum]
+#Get AEM from source
+if (node['aem']['s3'] == 'true' && node['aem']['use_yum'])
+  aws_s3_file ("/tmp/#{node[:aem][:jar_source]}.jar") do
+        bucket "cru-aem6"
+        remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
+        aws_access_key_id aws['aws_access_key_id']
+        aws_secret_access_key aws['aws_secret_access_key']
+        mode "0644"
+        not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
+      end
   aem_jar_installer "publish" do
     download_url node[:aem][:download_url]
     default_context node[:aem][:publish][:default_context]
     port node[:aem][:publish][:port]
     action :install
   end
+else  
+  unless node[:aem][:use_yum]
+    aem_jar_installer "publish" do
+      download_url node[:aem][:download_url]
+      default_context node[:aem][:publish][:default_context]
+      port node[:aem][:publish][:port]
+      action :install
+    end
+  end
 end
 
-if node['aem']['license_url'] == "S3"
+#Get license file from source
+if node['aem']['s3'] == 'true'
     aws_s3_file "#{node[:aem][:publish][:default_context]}/license.properties" do
       bucket "cru-aem6"
       remote_path "/installation_files/license.properties"

@@ -20,7 +20,7 @@ include_recipe "curl::default"
 include_recipe "curl::libcurl"
 include_recipe "aws"
 aws = data_bag_item("aws", "main")
-include_recipe "aem::_base_aem_setup"
+#include_recipe "aem::_base_aem_setup"
 
 #Get AEM from source
 if (node['aem']['s3'] == 'true' && node['aem']['use_yum'])
