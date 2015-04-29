@@ -14,7 +14,7 @@ local_password = "#{node['aem']['author']['admin_password']}"
 
 
 execute 'add_publish_agent' do
-  command 'curl -u <%=local_user%>:<%=local_password%> -X POST http://<%=author_host%>:<%=local_port%>/etc/replication/agents.author/publish-<%=instance%>/_jcr_content -d jcr:title="<%=type%> Agent <%=instance%>" -d transportUri=http://<%=ipaddress%>:<%=port%>/bin/receive?sling:authRequestLogin=1 -d enabled=true -d transportUser=<%=user%> -d transportPassword=<%=password%> -d cq:template="/libs/cq/replication/templates/agent" -d retryDelay=60000 -d logLevel=info -d serializationType=durbo -d jcr:description="<%=type%> Agent <%=instance%>" -d sling:resourceType="cq/replication/components/agent"'
+  command 'curl -u #{local_user}:#{local_password} -X POST http://#{author_host}:#{local_port}/etc/replication/agents.author/publish-#{instance}/_jcr_content -d jcr:title="#{type} Agent #{instance}" -d transportUri=http://#{ipaddress}:#{port}/bin/receive?sling:authRequestLogin=1 -d enabled=true -d transportUser=#{user} -d transportPassword=#{password} -d cq:template="/libs/cq/replication/templates/agent" -d retryDelay=60000 -d logLevel=info -d serializationType=durbo -d jcr:description="#{type} Agent #{instance}" -d sling:resourceType="cq/replication/components/agent"'
   action :run
 end
 
