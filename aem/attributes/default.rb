@@ -19,6 +19,7 @@
 
 include_attribute "apache2"
 
+default[:aem][:s3] = false
 default[:aem][:jar_source] = nil
 default[:aem][:version] = nil
 default[:aem][:jvm_opts] = {}

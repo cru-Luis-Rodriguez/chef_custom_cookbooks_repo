@@ -8,7 +8,7 @@ This cookbook installs and configures [Adobe Experience Manager (AEM)](http://ww
 * CentOS, Ubuntu
 
 ## Supported Versions
-** AEM 6.0.1 -- testing
+* AEM 6.0.1
 * AEM 6.0.0
 * AEM 5.6.1
 * AEM 5.6.0
@@ -17,10 +17,12 @@ This cookbook installs and configures [Adobe Experience Manager (AEM)](http://ww
 ## Featured Functionality
 
 * Unattended installation of aem author, publish, and dispatcher nodes.
-***  Automatically search for and configure aem cluster members (dispatcher, author, publish) using chef searches. (this does not work) (I've made changes to the original recipe to make it work on AWS opsworks. 
+* Automatically search for and configure aem cluster members (dispatcher, author, publish) using chef searches. 
 * Configure replication agents using the replicator provider.
 * Configure dispatcher farms with the farm provider.
 * Deploy and remove aem packages with the package provider (recommended for development purposes only).
+* Support for S3, as source for installation files using “aws” recipe.
+* Support for AWS opsworks
 
 ## Attributes
 

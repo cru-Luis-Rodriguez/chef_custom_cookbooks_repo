@@ -22,35 +22,35 @@ include_recipe "aws"
 aws = data_bag_item("aws", "main")
 include_recipe "aem::_base_aem_setup"
 
-publish = search(:node, "role:publish").first
-Chef::Log.info("The private IP is '#{publish[:private_ip]}'")
-Chef::Log.info("The private IP is '#{publish[:hostname]}'")
-
-dispatcher = search(:node, "role:dispatcher").first
-Chef::Log.info("The private IP is '#{dispatcher[:private_ip]}'")
-Chef::Log.info("The private IP is '#{dispatcher[:hostname]}'")
-
-#source url can be file:///tmp/somefile
-
-aws_s3_file ("/tmp/#{node[:aem][:jar_source]}.jar") do
-      bucket "cru-aem6"
-      remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
-      aws_access_key_id aws['aws_access_key_id']
-      aws_secret_access_key aws['aws_secret_access_key']
-      mode "0644"
-      not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
-    end
-
-unless node[:aem][:use_yum]
+#Get AEM from source
+if (node['aem']['s3'] == 'true' && node['aem']['use_yum'])
+  aws_s3_file "/tmp/#{node['aem']['jar_source']}.jar" do
+        bucket "cru-aem6"
+        remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
+        aws_access_key_id aws['aws_access_key_id']
+        aws_secret_access_key aws['aws_secret_access_key']
+        mode "0644"
+        not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
+  end
   aem_jar_installer "author" do
     download_url node[:aem][:download_url]
     default_context node[:aem][:author][:default_context]
     port node[:aem][:author][:port]
     action :install
   end
+else
+  unless node[:aem][:use_yum]
+    aem_jar_installer "author" do
+      download_url node[:aem][:download_url]
+      default_context node[:aem][:author][:default_context]
+      port node[:aem][:author][:port]
+      action :install
+    end
+  end
 end
 
-if node['aem']['license_url'] == "S3"
+#Get license file form source
+if node['aem']['s3'] == 'true'
     aws_s3_file "#{node[:aem][:author][:default_context]}/license.properties" do
       bucket "cru-aem6"
       remote_path "/installation_files/license.properties"
@@ -67,7 +67,7 @@ if node['aem']['license_url'] == "S3"
     end
 end
 
-
+#Determine AEM Version jar format
 if node[:aem][:version].to_f > 5.4 then
   node.set[:aem][:author][:runnable_jar] = "aem-author-p#{node[:aem][:author][:port]}.jar"
 end
