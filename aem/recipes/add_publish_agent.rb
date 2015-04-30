@@ -5,7 +5,7 @@ author = search(:node, "role:author").first
 
 
 
-template '\tmp\add_publish.sh' do
+template '/tmp/add_publish.sh' do
   source 'add_publish.erb'
   owner "root"
   group "root"
