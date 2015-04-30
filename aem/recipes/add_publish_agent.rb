@@ -23,6 +23,6 @@ template '\tmp\add_publish.sh' do
 end
 
 execute 'add_publish' do
-  command './tmp/add_publish.sh'
+  command '/tmp/add_publish.sh'
   action :run
 end
