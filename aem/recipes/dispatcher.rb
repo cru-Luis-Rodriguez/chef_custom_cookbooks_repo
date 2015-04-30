@@ -26,7 +26,7 @@ include_recipe "apache2::mod_ssl"
 include_recipe "apache2::mod_expires"
 
 #source url can be file:///tmp/somefile
-if node['aem']['s3'] == 'true'
+if node['aem']['s3'] == true
   aws_s3_file "/tmp/mod_dispatcher.so" do
         bucket "cru-aem6"
         remote_path "/installation_files/dispatcher-apache2.4-4.1.7.so"
