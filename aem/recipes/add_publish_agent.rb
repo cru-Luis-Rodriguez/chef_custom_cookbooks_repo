@@ -26,3 +26,4 @@ execute 'add_publish' do
   command '/tmp/add_publish.sh'
   action :run
 end
+
