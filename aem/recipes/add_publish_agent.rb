@@ -10,7 +10,7 @@ template '\tmp\add_publish.sh' do
   owner "root"
   group "root"
   mode 0644
-  varialbles(
+  variables(
     :author_host => author['private_ip'],
     :instance => node['hostname'],
     :ipaddress => node['ipaddress'],
