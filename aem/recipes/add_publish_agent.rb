@@ -9,7 +9,7 @@ template '\tmp\add_publish.sh' do
   source 'add_publish.erb'
   owner "root"
   group "root"
-  mode 0644
+  mode 0654
   variables(
     :author_host => author['private_ip'],
     :instance => node['hostname'],
@@ -22,7 +22,7 @@ template '\tmp\add_publish.sh' do
   )
 end
 
-execute 'add_publish.sh' do
-  command '/tmp/add_publish.sh'
+execute 'add_publish' do
+  command './tmp/add_publish.sh'
   action :run
 end
