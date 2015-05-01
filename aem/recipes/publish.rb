@@ -29,8 +29,6 @@ if node['aem']['s3']
       remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
       aws_access_key_id aws['aws_access_key_id']
       aws_secret_access_key aws['aws_secret_access_key']
-      owner user
-      group user
       mode "0644"
       not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
   end
@@ -58,8 +56,6 @@ if node['aem']['s3'] == true
       remote_path "/installation_files/license.properties"
       aws_access_key_id aws['aws_access_key_id']
       aws_secret_access_key aws['aws_secret_access_key']
-      owner user
-      group user
       mode "0644"
     end
   else
