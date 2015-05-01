@@ -36,7 +36,7 @@ host.each do |h|
     runner = Mixlib::ShellOut.new(cmd)
     runner.run_command
     runner.error!
-    counter += 1
+    counter1 += 1
 end
 
 counter2 =0
