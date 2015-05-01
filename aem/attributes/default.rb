@@ -34,6 +34,15 @@ default[:aem][:cluster_name] = nil
 default[:aem][:geometrixx_priv_users] = [
   'author', 'jdoe@geometrixx.info', 'aparker@geometrixx.info'
 ]
+#aws opsworks aem commands
+default[:aem][:aws_command] = {
+  :replicator => {
+     :dispatcher => { :create => 'curl -F jcr:primaryType=cq:Page -F jcr:content= -u <%=local_user%>:<%=local_password%> http://<%=author_host%>:<%=author_port%>/etc/replication/agents.author/dispatcher<%=instance%>',
+                      :add => 'curl -u <%=local_user%>:<%=local_password%> -X POST http://<%=author_host%>:<%=author_port%>/etc/replication/agents.author/flush<%=instance%>/_jcr_content  -d transportUri=http://<%=ipaddress%>/dispatcher/invalidate.cache -d enabled=true -d transportUser=<%=user%> -d transportPassword=<%=password]%> -d jcr:title=flush<%=instance%> -d jcr:description=flush<%=instance%> -d serializationType=flush -d cq:template=/libs/cq/replication/templates/agent -d sling:resourceType="cq/replication/components/agent" -d retryDelay=60000 -d logLevel=info -d triggerSpecific=true -d triggerReceive=true',
+                      :remove => 'curl -u <%=local_user%>:<%=local_password%> -X DELETE http://<%=author_host%>:<%=author_port%>/etc/replication/agents.author/dispatcher<%=instance%>'}
+                 }  
+                              }
+#chef server commands
 default[:aem][:aem_options] = {
   "JAVA_HOME" => "/usr/java/default",
   "RUNAS_USER" => "crx",

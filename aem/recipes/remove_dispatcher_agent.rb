@@ -17,9 +17,7 @@ type = "agent"
 local_user = node['aem']['author']['admin_user']
 local_password = node['aem']['author']['admin_password']
 
-['aem']['command'] = {
-:dispatcher => { :remove => 'curl -u <%=local_user%>:<%=local_password%> -X DELETE http://<%=author_host%>:<%=author_port%>/etc/replication/agents.author/dispatcher<%=instance%>'}
-}
+
 
 host << {
     :author_host => author['private_ip'],
@@ -40,5 +38,6 @@ host do
     runner.run_command
     runner.error!
 end
+
 
 
