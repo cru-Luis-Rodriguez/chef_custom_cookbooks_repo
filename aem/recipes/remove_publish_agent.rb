@@ -17,7 +17,11 @@ local_password = node['aem']['author']['admin_password']
 
 
 execute 'remove_publish_agent' do
-  command 'curl -u <%=l@ocal_user%>:<%=@local_password%> -X DELETE http://<%=@author_host%>:<%=@author_port%>/etc/replication/agents.author/publish-<%=@instance%>'
+  command <<-EOH
+
+  curl -u <%=l@ocal_user%>:<%=@local_password%> -X DELETE http://<%=@author_host%>:<%=@author_port%>/etc/replication/agents.author/publish-<%=@instance%>
+
+  EOH
   action :run
 end
 
