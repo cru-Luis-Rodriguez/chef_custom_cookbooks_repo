@@ -5,13 +5,14 @@ author = search(:node, "role:author").first
 
 
 
-template '/tmp/add_publish.sh' do
+template '/opt/scripts/add_publish.sh' do
   source 'add_publish.erb'
   owner "root"
   group "root"
   mode 0654
   variables(
     :author_host => author['private_ip'],
+    :author_port => node['aem']['author']['port'],
     :instance => node['hostname'],
     :ipaddress => node['ipaddress'],
     :port => node['aem']['publish']['port'],
@@ -23,7 +24,7 @@ template '/tmp/add_publish.sh' do
 end
 
 execute 'add_publish' do
-  command '/tmp/add_publish.sh'
+  command '/opt/scripts/add_publish.sh'
   action :run
 end
 
