@@ -23,7 +23,7 @@ aws = data_bag_item("aws", "main")
 #include_recipe "aem::_base_aem_setup"
 
 #Get AEM from source
-if (node['aem']['s3'] == true && node['aem']['use_yum'])
+if (node['aem']['s3'] == true && node['aem']['use_yum'] == false)
   aws_s3_file "/tmp/#{node['aem']['jar_source']}.jar" do
         bucket "cru-aem6"
         remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
