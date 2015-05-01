@@ -30,7 +30,7 @@ host << {
     :local_password => node['aem']['author']['admin_password']
   }
 
-host do 
+host.each do |h|
   cmd = ERB.new(node[:aem][:aws_command][:replicator][:dispatcher][:create]).result(binding)
    log "creating flush agent with command: #{cmd}"
     runner = Mixlib::ShellOut.new(cmd)

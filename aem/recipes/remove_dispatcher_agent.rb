@@ -30,7 +30,7 @@ host << {
     :local_password => node['aem']['author']['admin_password']
   }
 
-host do 
+host.each do |h|
   cmd = ERB.new(node[:aem][:aws_commands][:dispatcher][:remove]).result(binding)
 
    log "Removing replication agent with command: #{cmd}"
