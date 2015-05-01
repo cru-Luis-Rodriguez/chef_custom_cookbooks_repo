@@ -1,18 +1,27 @@
 author = search(:node, "role:author").first
-Chef::Log.info("author private IP is '#{author[:private_ip]}'")
-Chef::Log.info("author hostname is '#{author[:hostname]}'")
-instance = "#{node[:hostname]}"
-ipaddress = "#{node[:ipaddress]}"
-port = "#{node['aem']['publish']['port']}"
-user = "#{node['aem']['publish']['admin_user']}"
-password = "#{node['aem']['publish']['admin_password']}"
-name = "#{node[:fqdn]}"
+  Chef::Log.info("author private IP is '#{author[:private_ip]}'")
+  Chef::Log.info("author hostname is '#{author[:hostname]}'")
+  log ("Found author host: '#{author['private_dns_name']}'")
+
+author_host = "#{author[:private_ip]}"
+author_port = node['aem']['author']['port']
+instance = node['hostname']
+ipaddress = node['ipaddress']
+port = node['aem']['publish']['port']
+user = node['aem']['publish']['admin_user']
+password = node['aem']['publish']['admin_password']
+name = node[:fqdn]
 type = "agent"
-local_user = "#{node['aem']['author']['admin_user']}"
-local_password = "#{node['aem']['author']['admin_password']}"
+local_user = node['aem']['author']['admin_user']
+local_password = node['aem']['author']['admin_password']
 
 
-execute 'add_publish_agent' do
-  command 'curl -u <%=local_user%>:<%=local_password%> -X POST http://<%=author%>:<%=local_port%>/etc/replication/agents.author/publish-<%=instance%>/_jcr_content -d jcr:title="<%=type%> Agent <%=instance%>" -d transportUri=http://<%=ipaddress%>:<%=port%>/bin/receive?sling:authRequestLogin=1 -d enabled=true -d transportUser=<%=user%> -d transportPassword=<%=password%> -d cq:template="/libs/cq/replication/templates/agent" -d retryDelay=60000 -d logLevel=info -d serializationType=durbo -d jcr:description="<%=type%> Agent <%=instance%>" -d sling:resourceType="cq/replication/components/agent"'
+
+execute 'remove_publish_agent' do
+  command {
+    'curl -F "jcr:primaryType=cq:Page" -F "jcr:content=" -u <%=@local_user%>:<%=@local_password%> http://<%=@author_host%>:<%=@author_port%>/etc/replication/agents.author/dispatcher<%=instance%>'
+    'curl -u <%=@local_user%>:<%=@local_password%> -X POST http://<%=@author_host%>:<%=@author_port%>/etc/replication/agents.author/flush<%=@instance%>/_jcr_content  -d transportUri=http://<%=@ipaddress%>/dispatcher/invalidate.cache -d enabled=true -d transportUser=<%=@user%> -d transportPassword=<%=@password]%> -d jcr:title=flush<%=@instance%> -d jcr:description=flush<%=@instance%> -d serializationType=flush -d cq:template=/libs/cq/replication/templates/agent -d sling:resourceType="cq/replication/components/agent" -d retryDelay=60000 -d logLevel=info -d triggerSpecific=true -d triggerReceive=true'
+  }
   action :run
 end
+  
