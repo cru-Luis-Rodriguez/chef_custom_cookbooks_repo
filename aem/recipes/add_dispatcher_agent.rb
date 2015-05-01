@@ -38,7 +38,7 @@ host.each do |h|
     runner.error!
 end
 
-host do 
+host.each do |h| 
   cmd = ERB.new(node[:aem][:aws_command][:replicator][:dispatcher][:add]).result(binding)
    log "adding flush agent with command: #{cmd}"
     runner = Mixlib::ShellOut.new(cmd)
