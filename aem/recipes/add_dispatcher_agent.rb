@@ -17,7 +17,7 @@ type = "agent"
 local_user = node['aem']['author']['admin_user']
 local_password = node['aem']['author']['admin_password']
 
-  
+host = []
 
 host << {
     :author_host => author['private_ip'],
