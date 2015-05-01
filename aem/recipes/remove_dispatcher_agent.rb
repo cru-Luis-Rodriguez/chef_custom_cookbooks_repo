@@ -31,7 +31,7 @@ host << {
   }
 
 host do 
-  cmd = ERB.new(node[:aem][:commands][:dispatcher][:remove]).result(binding)
+  cmd = ERB.new(node[:aem][:aws_commands][:dispatcher][:remove]).result(binding)
 
    log "Removing replication agent with command: #{cmd}"
     runner = Mixlib::ShellOut.new(cmd)
