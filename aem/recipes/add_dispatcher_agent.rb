@@ -34,7 +34,7 @@ host << {
   }
 
 host do 
-  cmd = ERB.new(node[:aem][:commands][:dispatcher][:create]).result(binding)
+  cmd = ERB.new(node[:aem][:command][:dispatcher][:create]).result(binding)
    log "creating flush agent with command: #{cmd}"
     runner = Mixlib::ShellOut.new(cmd)
     runner.run_command
@@ -42,7 +42,7 @@ host do
 end
 
 host do 
-  cmd = ERB.new(node[:aem][:commands][:dispatcher][:add]).result(binding)
+  cmd = ERB.new(node[:aem][:command][:dispatcher][:add]).result(binding)
    log "adding flush agent with command: #{cmd}"
     runner = Mixlib::ShellOut.new(cmd)
     runner.run_command
