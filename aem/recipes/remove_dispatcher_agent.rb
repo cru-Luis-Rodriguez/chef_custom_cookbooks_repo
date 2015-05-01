@@ -14,10 +14,6 @@ template '/opt/scripts/remove_dispatcher.sh' do
     :author_host => author['private_ip'],
     :author_port => node['aem']['author']['port'],
     :instance => node['hostname'],
-    :ipaddress => node['ipaddress'],
-    :port => node['aem']['publish']['port'],
-    :user => node['aem']['publish']['admin_user'],
-    :password => node['aem']['publish']['admin_password'],
     :local_user => node['aem']['author']['admin_user'],
     :local_password => node['aem']['author']['admin_password']
   )
