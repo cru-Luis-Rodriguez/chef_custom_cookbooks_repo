@@ -4,6 +4,12 @@ author = search(:node, "role:author").first
   log ("Found author host: '#{author['private_dns_name']}'")
 
 
+directory '/opt/scripts' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
 
 template '/opt/scripts/add_dispatcher.sh' do
   source 'add_dispatcher.erb'

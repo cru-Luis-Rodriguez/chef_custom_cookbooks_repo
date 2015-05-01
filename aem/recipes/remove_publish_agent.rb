@@ -3,7 +3,12 @@ author = search(:node, "role:author").first
   Chef::Log.info("author hostname is '#{author['hostname']}'")
   log ("Found author host: '#{author['private_dns_name']}'")
 
-
+directory '/opt/scripts' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
 
 template '/opt/scripts/remove_publish.sh' do
   source 'remove_publish.erb'
