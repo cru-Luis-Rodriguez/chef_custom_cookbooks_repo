@@ -23,20 +23,22 @@ aws = data_bag_item("aws", "main")
 #include_recipe "aem::_base_aem_setup"
 
 #Get AEM from source
-if node['aem']['s3'] == true 
+if node['aem']['s3'] 
   aws_s3_file "/tmp/#{node['aem']['jar_source']}.jar" do
-        bucket "cru-aem6"
-        remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
-        aws_access_key_id aws['aws_access_key_id']
-        aws_secret_access_key aws['aws_secret_access_key']
-        mode "0644"
-        not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
+      bucket "cru-aem6"
+      remote_path ("/installation_files/#{node[:aem][:jar_source]}.jar")
+      aws_access_key_id aws['aws_access_key_id']
+      aws_secret_access_key aws['aws_secret_access_key']
+      owner user
+      group user
+      mode "0644"
+      not_if { ::File.exist?("/tmp/#{node[:aem][:jar_source]}.jar") }
   end
   aem_jar_installer "author" do
-    download_url node[:aem][:download_url]
-    default_context node[:aem][:author][:default_context]
-    port node[:aem][:author][:port]
-    action :install
+     download_url node[:aem][:download_url]
+     default_context node[:aem][:author][:default_context]
+     port node[:aem][:author][:port]
+     action :install
   end
 else
   unless node[:aem][:use_yum]
@@ -50,18 +52,22 @@ else
 end
 
 #Get license file form source
-if node['aem']['s3'] == true
+if node['aem']['s3']
     aws_s3_file "#{node[:aem][:author][:default_context]}/license.properties" do
       bucket "cru-aem6"
       remote_path "/installation_files/license.properties"
       aws_access_key_id aws['aws_access_key_id']
       aws_secret_access_key aws['aws_secret_access_key']
+      owner user
+      group user
       mode "0644"
     end
   else
     unless node[:aem][:license_url].nil?
       remote_file "#{node[:aem][:author][:default_context]}/license.properties" do
         source "#{node[:aem][:license_url]}"
+        owner user
+        group user
         mode "0644"
       end
     end
