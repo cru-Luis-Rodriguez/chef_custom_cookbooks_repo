@@ -22,3 +22,6 @@
 [submodule "mongodb-opsworks"]
 	path = mongodb-opsworks
 	url = https://github.com/cru-Luis-Rodriguez/mongodb-opsworks.git
+[submodule "mongodb"]
+	path = mongodb
+	url = https://github.com/cru-Luis-Rodriguez/mongodb.git
