@@ -25,3 +25,6 @@
 [submodule "wildfly"]
 	path = wildfly
 	url = https://github.com/cru-Luis-Rodriguez/wildfly.git
+[submodule "mongodb-opsworks"]
+	path = mongodb-opsworks
+	url = https://github.com/cru-Luis-Rodriguez/mongodb-opsworks.git
