@@ -14,8 +14,8 @@
 	path = manage_tnsnames
 	url = https://github.com/cru-Luis-Rodriguez/manage_tnsnames.git
 [submodule "aem"]
-        path = aem
-        url = https://github.com/cru-Luis-Rodriguez/aem.git
+	path = aem
+	url = https://github.com/cru-Luis-Rodriguez/aem.git
 [submodule "s3bucket_ops"]
 	path = s3bucket_ops
 	url = https://github.com/cru-Luis-Rodriguez/s3bucket_ops.git
